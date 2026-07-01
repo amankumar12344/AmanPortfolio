@@ -94,10 +94,16 @@ const Footer = () => {
         </div>
 
         {/* Right: Copyright */}
-        <div className="text-center md:text-right">
+        <div className="text-center md:text-right space-y-1.5">
           <p className="text-xs text-gray-600 font-body">
             &copy; {new Date().getFullYear()} Aman Kumar. All rights reserved.
           </p>
+          <a
+            href="/admin"
+            className="inline-block text-[10px] font-mono uppercase tracking-widest text-gray-700 hover:text-[#00f0ff] hover:drop-shadow-[0_0_3px_rgba(0,240,255,0.4)] transition-all duration-300"
+          >
+            Admin Portal
+          </a>
         </div>
 
       </div>
