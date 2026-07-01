@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import ProjectMockupPreview from './ProjectMockupPreview';
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
   // Prevent body scrolling when modal is open
@@ -74,11 +75,16 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-gray-400 hover:text-[#00f0ff] p-2 hover:bg-gray-900/50 rounded-full transition-all duration-300"
+              className="absolute top-4 right-4 text-gray-400 hover:text-[#00f0ff] p-2 hover:bg-gray-900/50 rounded-full transition-all duration-300 z-20"
               aria-label="Close modal"
             >
               <FaTimes className="w-5 h-5" />
             </button>
+
+            {/* HD Visual Interface Mockup Banner */}
+            <div className="mb-6 relative z-10">
+              <ProjectMockupPreview category={project.category} heightClass="h-48" />
+            </div>
 
             {/* Category Tag */}
             <span className="text-xs font-semibold uppercase tracking-widest text-[#00f0ff] bg-cyan-950/40 border border-cyan-500/20 px-3 py-1 rounded-full w-fit mb-4">

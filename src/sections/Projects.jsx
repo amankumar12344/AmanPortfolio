@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaWallet, FaBuildingColumns, FaLocationCrosshairs, FaUsersGear, FaCloudSun, FaFolderOpen, FaArrowRight } from 'react-icons/fa6';
 import ProjectModal from '../components/ProjectModal';
+import ProjectMockupPreview from '../components/ProjectMockupPreview';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -239,12 +240,15 @@ const Projects = () => {
                   key={project.title}
                   onClick={() => handleOpenModal(project)}
                   onMouseMove={handleMouseMove}
-                  className="glass-card rounded-2xl p-6 h-[340px] flex flex-col justify-between group cursor-pointer hover:border-cyan-500/30 transition-all duration-300"
+                  className="glass-card rounded-2xl p-5 h-[430px] flex flex-col justify-between group cursor-pointer hover:border-cyan-500/30 transition-all duration-300"
                 >
-                  <div>
+                  <div className="space-y-4">
+                    {/* Interactive CSS Mockup Preview */}
+                    <ProjectMockupPreview category={project.category} />
+
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-cyan-950/40 border border-cyan-500/20 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-950/40 border border-cyan-500/20 group-hover:scale-105 transition-transform duration-300 shadow-md">
                         {getProjectIcon(project.icon)}
                       </div>
                       <span className="text-[10px] font-extrabold font-heading text-gray-500 uppercase tracking-widest bg-cyan-950/20 border border-cyan-500/10 px-2.5 py-1 rounded-full">
@@ -253,12 +257,12 @@ const Projects = () => {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg font-bold font-heading text-white mb-3 group-hover:text-[#00f0ff] transition-colors duration-300 tracking-wide">
+                    <h3 className="text-base font-bold font-heading text-white group-hover:text-[#00f0ff] transition-colors duration-300 tracking-wide">
                       {project.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-gray-400 font-body text-xs sm:text-sm leading-relaxed line-clamp-4">
+                    <p className="text-gray-400 font-body text-xs leading-relaxed line-clamp-3">
                       {project.description}
                     </p>
                   </div>
