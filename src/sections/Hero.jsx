@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaJava, FaGears, FaChevronDown } from 'react-icons/fa6';
-import { SiSpringboot } from 'react-icons/si';
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
@@ -129,26 +127,6 @@ const Hero = () => {
                 className="w-full h-full object-cover object-center transform hover:scale-110 transition-transform duration-500"
               />
             </div>
-
-            {/* Floating Badge (Spring Boot - Top Left) */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-              className="absolute -top-2 -left-4 glass-card px-4 py-2.5 rounded-2xl flex items-center gap-2 border border-cyan-500/20 shadow-lg text-xs"
-            >
-              <SiSpringboot className="w-4 h-4 text-[#6db33f]" />
-              <span className="font-bold text-white tracking-wide">Spring Boot</span>
-            </motion.div>
-
-            {/* Floating Badge (Microservices - Bottom Right) */}
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, delay: 2, ease: 'easeInOut' }}
-              className="absolute -bottom-2 -right-4 glass-card px-4 py-2.5 rounded-2xl flex items-center gap-2 border border-cyan-500/20 shadow-lg text-xs"
-            >
-              <FaGears className="w-4 h-4 text-[#38bdf8] animate-spin" style={{ animationDuration: '6s' }} />
-              <span className="font-bold text-white tracking-wide">Microservices</span>
-            </motion.div>
 
           </div>
         </motion.div>
