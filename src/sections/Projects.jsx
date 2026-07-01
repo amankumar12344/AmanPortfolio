@@ -64,16 +64,22 @@ const Projects = () => {
     }
   ];
 
-  const SANITY_CONFIG = {
-    projectId: 'YOUR_SANITY_PROJECT_ID',
-    dataset: 'production',
-    apiVersion: '2023-01-01'
-  };
-
   useEffect(() => {
     // Dynamic Fetch from Sanity.io CMS
     const fetchProjects = async () => {
-      if (!SANITY_CONFIG.projectId || SANITY_CONFIG.projectId === 'YOUR_SANITY_PROJECT_ID') {
+      // Prioritize local storage (from Admin panel settings), then env variables, then default placeholders
+      const localProjectId = localStorage.getItem('sanity_project_id');
+      const localDataset = localStorage.getItem('sanity_dataset') || 'production';
+      const localToken = localStorage.getItem('sanity_token') || '';
+
+      const envProjectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+      const envDataset = import.meta.env.VITE_SANITY_DATASET || 'production';
+
+      const finalProjectId = localProjectId || envProjectId || 'YOUR_SANITY_PROJECT_ID';
+      const finalDataset = localDataset || envDataset || 'production';
+      const apiVersion = '2023-01-01';
+
+      if (!finalProjectId || finalProjectId === 'YOUR_SANITY_PROJECT_ID') {
         // Automatically default to static projects without delay
         setProjects(fallbackProjects);
         setLoading(false);
@@ -81,10 +87,14 @@ const Projects = () => {
       }
 
       const query = '*[_type == "project"] | order(orderRank asc)';
-      const url = `https://${SANITY_CONFIG.projectId}.api.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
+      const url = `https://${finalProjectId}.api.sanity.io/v${apiVersion}/data/query/${finalDataset}?query=${encodeURIComponent(query)}`;
 
       try {
-        const res = await fetch(url);
+        const headers = {};
+        if (localToken) {
+          headers['Authorization'] = `Bearer ${localToken}`;
+        }
+        const res = await fetch(url, { headers });
         if (!res.ok) throw new Error('API request failed');
         const data = await res.json();
         

@@ -19,10 +19,24 @@ import Projects from './sections/Projects';
 import Achievements from './sections/Achievements';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import Admin from './sections/Admin';
 
 const App = () => {
+  const [isAdminPath, setIsAdminPath] = useState(window.location.pathname === '/admin');
   const [showSplash, setShowSplash] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setIsAdminPath(window.location.pathname === '/admin');
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  if (isAdminPath) {
+    return <Admin />;
+  }
 
   // Track scrolling intersection to update current section in Navbar
   useEffect(() => {
